@@ -22,8 +22,9 @@ public class TowersOfHanoi {
 			return topDisc(peg,top-1);
 	}
 	public void moveDisc(int source, int destination){
-		towers[topDisc(destination,this.numberOfDiscs-1)-1][destination]=towers[topDisc(source,this.numberOfDiscs-1)][source];
-		towers[topDisc(source,this.numberOfDiscs-1)][source]=0;
+		towers[topDisc(destination,this.numberOfDiscs-1)-1][destination]
+				=towers[topDisc(source,this.numberOfDiscs-1)][source];
+		towers[topDisc(source,this.numberOfDiscs-1)][source] = 0;
 	}
 	
 	
@@ -53,18 +54,4 @@ public class TowersOfHanoi {
 	public int getNumberOfDiscs() {
 		return numberOfDiscs;
 	}
-	public static void main(String[] args) {
-		TowersOfHanoi t = new TowersOfHanoi(3);
-		t.moveTower(t.numberOfDiscs,0,1,2);
-		for (int x=0;x<t.getNumberOfDiscs();x++){
-			for (int y=0;y<3;y++){
-				if (t.towers[x][y]==0)
-					System.out.print(" | ");
-				else
-					System.out.print(" "+t.towers[x][y]+" ");
-			}
-			System.out.println();
-		}
-	}
-
 }
