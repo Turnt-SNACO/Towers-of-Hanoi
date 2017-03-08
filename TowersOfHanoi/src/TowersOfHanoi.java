@@ -12,27 +12,32 @@ public class TowersOfHanoi {
 		}
 	}
 	
-	//simply returns the location of the top disc on the given peg
-	public int topDisc(int peg, int top){
+	//relay to the recursive function topDiscRec
+	//returns the topmost occupied slot in the vertical of towers array
+	public int topDisc(int peg){
+		return topDiscRec(peg, numberOfDiscs-1);
+	}
+	
+	//Recursive function to find top disc
+	private int topDiscRec(int peg, int top){
 		if (towers[top][peg]==0)
 			return top+1;
 		else if (towers[top][peg]==1)
 			return top;
 		else
-			return topDisc(peg,top-1);
+			return topDiscRec(peg,top-1);
 	}
+	
+	//move disc from source peg to destination peg
 	public void moveDisc(int source, int destination){
-		towers[topDisc(destination,this.numberOfDiscs-1)-1][destination]
-				=towers[topDisc(source,this.numberOfDiscs-1)][source];
-		towers[topDisc(source,this.numberOfDiscs-1)][source] = 0;
+		towers[topDisc(destination)-1][destination]=towers[topDisc(source)][source];
+		towers[topDisc(source)][source] = 0;
 	}
 	
-	
+	//feed arg numDiscs as numberOfDiscs
+	//for general purposes start, aux, and end args should be fed 0,1,2
+	//this will display every move made through the console
 	public void moveTower(int numDiscs,int start, int aux, int end){
-		/*
-		 *feed arg numDiscs as numberOfDiscs
-		 *for general purposes start, aux, and end args should be fed 0,1,2 
-		*/
 		if (numDiscs>=1){
 			moveTower(numDiscs-1,start,end,aux);
 			for (int x=0;x<getNumberOfDiscs();x++){
@@ -51,6 +56,7 @@ public class TowersOfHanoi {
 		else if (numDiscs==1)
 			moveDisc(start,end);
 	}
+	
 	public int getNumberOfDiscs() {
 		return numberOfDiscs;
 	}
